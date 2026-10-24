@@ -43,7 +43,7 @@ tasks:
       4. Save the final report as 'research_report.md' in the /tmp directory
          using the filesystem tool.
       Important rules:
-      - Always use the TavilyWebSearch content retriever to get current information
+      - Use the TavilyWebSearch tool when current information is needed; do not assume search has already run
       - Do not make up or hallucinate information
       - Include specific examples and data points when available
       - Always save the final report to research_report.md using the filesystem tool.
