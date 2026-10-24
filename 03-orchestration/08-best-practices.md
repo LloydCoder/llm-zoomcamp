@@ -22,20 +22,18 @@ Pricing per 1M tokens ([full pricing page](https://ai.google.dev/gemini-api/docs
 
 | Model | Tier | Input | Output |
 |-------|------|-------|--------|
-| Gemini 2.5 Flash | Free | $0.00 | $0.00 |
-| Gemini 2.5 Flash | Batch / Flex | $0.15 | $1.25 |
-| Gemini 3.5 Flash | Free | $0.00 | $0.00 |
-| Gemini 3.5 Flash | Standard | $1.50 | $9.00 |
-| Gemini 3.5 Flash | Batch / Flex | $0.75 | $4.50 |
-| Gemini 3.5 Flash | Priority | $2.70 | $16.20 |
+| Gemini 3.8 Flash | Free tier | $0.00 | $0.00 |
+| Gemini 3.8 Flash | Standard (through Dec 31, 2026) | $0.75 | $3.75 |
+| Gemini 3.8 Flash | Standard (from Jan 1, 2027) | $1.50 | $7.50 |
+| Gemini 3.5 Flash-Lite | Standard | $0.30 | $2.50 |
 
-Use Gemini 2.5 Flash for most workflows — it's cheaper and free for standard inference. Step up to Gemini 3.5 Flash when you need stronger reasoning for complex agent tasks.
+Use Gemini 3.8 Flash for most agentic workflows. Google currently limits access to Gemini 2.5 models to users who have actively used them; for new projects, prefer Gemini 3.8 Flash or a lower-cost current model such as Gemini 3.5 Flash-Lite. Check the pricing page before running cost-sensitive workflows.
 
 Cost-saving tips:
 
 1. Start with the free tier for learning and development
 2. Use smaller/cheaper models for simple tasks — check the [pricing page](https://ai.google.dev/gemini-api/docs/pricing)
-3. Set `maxOutputTokens` to limit response size
+3. Set `maxToken` to limit response size
 4. Monitor token usage in execution outputs
 5. Use traditional workflows when determinism is needed
 
@@ -83,5 +81,5 @@ Before deploying AI workflows to production:
 
 1. Test thoroughly — run multiple times with different inputs, verify outputs are consistent and accurate
 2. Add fallbacks — handle API failures with retries and configure alerts on failure
-3. Set limits — cap `maxOutputTokens` to control costs
+3. Set limits — cap `maxToken` to control costs
 4. Document behavior — explain what the agent does in your flow and task descriptions

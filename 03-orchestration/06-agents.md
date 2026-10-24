@@ -63,7 +63,7 @@ tasks:
     # LLM provider configuration
     provider:
       type: io.kestra.plugin.ai.provider.GoogleGemini
-      modelName: gemini-2.5-flash
+      modelName: gemini-3.8-flash
       apiKey: "{{ secret('GEMINI_API_KEY') }}"
 
     # Tools the agent can use
@@ -128,7 +128,7 @@ tasks:
     provider:
       type: io.kestra.plugin.ai.provider.GoogleGemini
       apiKey: "{{ secret('GEMINI_API_KEY') }}"
-      modelName: gemini-2.5-flash
+      modelName: gemini-3.8-flash
     configuration:
       logRequests: true
       logResponses: true

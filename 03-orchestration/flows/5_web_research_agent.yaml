@@ -29,11 +29,11 @@ tasks:
     provider:
       type: io.kestra.plugin.ai.provider.GoogleGemini
       apiKey: "{{ secret('GEMINI_API_KEY') }}"
-      modelName: gemini-2.5-flash
+      modelName: gemini-3.8-flash
     prompt: "{{ inputs.research_topic }}"
     systemMessage: |
       You are a thorough research assistant. Follow this process:
-      1. Use the TavilyWebSearch content retriever to gather up-to-date information on the topic. Search multiple times if needed to get comprehensive coverage.
+      1. Use the TavilyWebSearch tool to gather up-to-date information on the topic. Search at most five times, refining queries as needed, to get comprehensive coverage.
       2. Evaluate the search results and determine if you have enough information. If not, search again with refined queries.
       3. Synthesize your findings into a well-structured Markdown report with:
          - Executive Summary (2-3 sentences)
@@ -47,11 +47,13 @@ tasks:
       - Do not make up or hallucinate information
       - Include specific examples and data points when available
       - Always save the final report to research_report.md using the filesystem tool.
-    contentRetrievers:
-      - type: io.kestra.plugin.ai.retriever.TavilyWebSearch
-        apiKey: "{{ secret('TAVILY_API_KEY') }}"
-        maxResults: 10
+    configuration:
+      maxCumulativeTokens: 20000
+      maxToken: 2048
+    maxSequentialToolsInvocations: 6
     tools:
+      - type: io.kestra.plugin.ai.tool.TavilyWebSearch
+        apiKey: "{{ secret('TAVILY_API_KEY') }}"
       - type: io.kestra.plugin.ai.tool.DockerMcpClient
         image: mcp/filesystem
         command: ["/tmp"]

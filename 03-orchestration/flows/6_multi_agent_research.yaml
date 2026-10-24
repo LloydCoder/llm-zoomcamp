@@ -21,6 +21,9 @@ tasks:
     configuration:
       logRequests: false
       logResponses: false
+      maxCumulativeTokens: 20000
+      maxToken: 2048
+    maxSequentialToolsInvocations: 5
     provider:
       type: io.kestra.plugin.ai.provider.GoogleGemini
     systemMessage: |
@@ -57,14 +60,17 @@ tasks:
         configuration:
           logRequests: false
           logResponses: false
+          maxCumulativeTokens: 10000
+          maxToken: 1024
+        maxSequentialToolsInvocations: 5
         systemMessage: |
           You are a research assistant that searches the web for factual and up-to-date company information as of date {{ now() }}.
           Look for recent news from this year, funding announcements, blog posts, or competitor mentions.
           Return concise factual summaries — no markdown, no formatting, no speculation.
         provider:
           type: io.kestra.plugin.ai.provider.GoogleGemini
-        contentRetrievers:
-          - type: io.kestra.plugin.ai.retriever.TavilyWebSearch
+        tools:
+          - type: io.kestra.plugin.ai.tool.TavilyWebSearch
             apiKey: "{{ secret('TAVILY_API_KEY') }}"
 
   - id: parse_results
@@ -98,6 +104,6 @@ tasks:
 pluginDefaults:
   - type: io.kestra.plugin.ai.provider.GoogleGemini
     values:
-      modelName: gemini-2.5-flash
+      modelName: gemini-3.8-flash
       apiKey: "{{ secret('GEMINI_API_KEY') }}"
 
